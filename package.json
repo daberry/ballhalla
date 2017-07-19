@@ -7,7 +7,8 @@
     "lib": "lib"
   },
   "scripts": {
-    "test": "mocha test/client/ClientSpec.js && mocha test/server/ServerSpec.js"
+    "test": "mocha test/client/ClientSpec.js && mocha test/server/ServerSpec.js",
+    "start": "node server-p2.js"
   },
   "repository": {
     "type": "git",
@@ -21,8 +22,9 @@
   "homepage": "https://github.com/daberry/thesis-project#readme",
   "dependencies": {
     "chai": "^4.1.0",
-    "mocha": "^3.4.2",
     "express": "^4.15.3",
+    "mocha": "^3.4.2",
+    "p2": "^0.7.1",
     "socket.io": "^2.0.3"
   }
 }
