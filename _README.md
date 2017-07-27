@@ -10,11 +10,11 @@ Team
 
 ## Table of Contents
 
-1. [Usage](Usage)
-2. [Tools](Tools)
-    1. [Installing Dependencies](Installing Dependencies)
-    2. [Running Locally](Running Locally)
-3. [Workflow](Workflow)
+1. [Usage](https://github.com/DJJS/thesis-project/blob/master/_README.md#usage)
+2. [Tools](https://github.com/DJJS/thesis-project/blob/master/_README.md#tools)
+    1. [Installing Dependencies](https://github.com/DJJS/thesis-project/blob/master/_README.md#installing-dependencies)
+    2. [Running Locally](https://github.com/DJJS/thesis-project/blob/master/_README.md#running-locally)
+3. [Workflow](https://github.com/DJJS/thesis-project/blob/master/_README.md#workflow)
 
 ## Usage
 
