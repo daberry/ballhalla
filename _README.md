@@ -1,4 +1,4 @@
-Ballhalla
+# Ballhalla
 
 A casual free-for-all king of the hill game with an easy learning curve and no sign up required.
 
@@ -10,11 +10,11 @@ Team
 
 ## Table of Contents
 
-1. [Usage](##Usage)
-2. [Tools](##Tools)
-    1. [Installing Dependencies](###Installing Dependencies)
-    2. [Running Locally](###Running Locally)
-3. [Workflow](##Workflow)
+1. [Usage](Usage)
+2. [Tools](Tools)
+    1. [Installing Dependencies](Installing Dependencies)
+    2. [Running Locally](Running Locally)
+3. [Workflow](Workflow)
 
 ## Usage
 
