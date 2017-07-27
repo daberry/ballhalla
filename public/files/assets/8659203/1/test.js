@@ -7,19 +7,23 @@ Network.prototype.initialize = function() {
     // this.socket = io('http://172.222.171.3:8081/');
     this.socket.emit('initialize');
     var self = this;
-    
+
     this.player = this.app.root.findByName ('Player');
     this.other = this.app.root.findByName ('Other');
+<<<<<<< HEAD:public/files/assets/8659203/1/test.js
     console.log('this.other', this.other);
     
+=======
+
+>>>>>>> Handle merge conflicts:public/files/assets/8604432/1/test.js
     this.socket.on('playerData', function(data) {
         self.initializePlayers(data);
     });
-    
+
     this.socket.on('playerJoined', function(data) {
         self.addPlayer(data);
     });
-    
+
     this.socket.on ('playerMoved', function (data) {
         self.movePlayer (data);
     });
@@ -29,13 +33,17 @@ Network.prototype.initializePlayers = function(data) {
     this.players = data.players;
     this.id = data.id;
     this.player.id = data.id;
+<<<<<<< HEAD:public/files/assets/8659203/1/test.js
     
+=======
+
+>>>>>>> Handle merge conflicts:public/files/assets/8604432/1/test.js
     for (var i = 0; i < this.players.length; i++) {
         if (i !== this.id) {
             this.players[i].entity = this.createPlayerEntity (data.players[i]);
         }
     }
-    
+
     this.initialized = true;
 };
 
@@ -46,20 +54,23 @@ Network.prototype.addPlayer = function(data) {
 
 Network.prototype.createPlayerEntity = function(data) {
     var newPlayer = this.other.clone();
-    
+
     newPlayer.enabled = true;
     newPlayer.id = data.id;
     newPlayer.lastCollision = null;
+<<<<<<< HEAD:public/files/assets/8659203/1/test.js
     
+=======
+
+>>>>>>> Handle merge conflicts:public/files/assets/8604432/1/test.js
     this.other.getParent().addChild(newPlayer);
-    if (data) {
-        console.log('data', data);
-        console.log('newPlayer', newPlayer);
-        console.log('newPLayer.rigidBody', newPlayer.rigidBody);
-        console.log(this.player);
+    if (data.x & data.y & data.z) {
+        // console.log('data', data);
+        // console.log('newPlayer', newPlayer);
+        // console.log('newPLayer.rigidBody', newPlayer.rigidBody);
         newPlayer.rigidbody.teleport(data.x, data.y, data.z);
     }
-    
+    // console.log(newPlayer);
     return newPlayer;
 };
 

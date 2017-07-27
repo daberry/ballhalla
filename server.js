@@ -52,6 +52,7 @@ io.sockets.on('connection', function(socket) {
 
     socket.emit('playerData', {id: idNum, players: players});
 
+
     socket.broadcast.emit('playerJoined', newPlayer);
   });
 
