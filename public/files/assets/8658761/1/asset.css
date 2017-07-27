@@ -1,0 +1,28 @@
+.container {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background-color: #aaaaaa;
+}
+
+.content-container {
+  width: 50%;
+  margin: 0 auto;
+  margin-top: 10%;
+  padding-top: 10%
+}
+
+.content {
+  display: block;
+  margin: 10px auto;
+  padding: 10px;
+  border-radius: 8px;
+}
+
+input.content {
+  padding: 10px;
+}
+
+button.content {
+  min-width: 100px;
+}
