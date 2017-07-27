@@ -18,7 +18,7 @@ Team
 
 ## Usage
 
-Just visit the [website](), enter a nickname or optionally sign in, and click Play!
+Just visit the [website](http://pond-game.herokuapp.com/), enter a nickname or optionally sign in, and click Play!
 
 ## Tools
 
