@@ -2,16 +2,16 @@ var Collider = pc.createScript('collider');
 
 // initialize code called once per entity
 Collider.prototype.initialize = function () {
-    this.entity.collision.on('collisionstart', this.onCollisionStart, this);
-    this.entity.collision.on('collisionstart', this.onBump, this);
+  this.entity.collision.on('collisionstart', this.onCollisionStart, this);
+  this.entity.collision.on('collisionstart', this.onBump, this);
 };
 
 Collider.prototype.onCollisionStart = function (result) {
-    if (result.other.name === "Other") {
-        // console.log('playing collision sound!');
-        // console.log('RESULT >>>>>>>>>', result.other);
-        this.entity.sound.play("collide");
-    }
+  if (result.other.name === "Other") {
+    // console.log('playing collision sound!');
+    // console.log('RESULT >>>>>>>>>', result.other);
+    this.entity.sound.play("collide");
+  }
 };
 
 Collider.prototype.onBump = function (result) {

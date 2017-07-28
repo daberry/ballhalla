@@ -6,22 +6,22 @@ StartScreen.attributes.add('start-screen', {type: 'asset', assetType: 'html', ti
 StartScreen.attributes.add('start-screen-style', {type: 'asset', assetType: 'css', title: 'csscsscsscss'});
 
 StartScreen.prototype.initialize = function() {
-    var style = document.createElement('style');
-    document.head.appendChild(style);
-    style.innerHTML = this['start-screen-style'].resource || '';
-    
-    this.div = document.createElement('div');
-    this.div.classList.add('container');
-    this.div.innerHTML = this['start-screen'].resource || '';
-    
-    document.body.appendChild(this.div);
-    
-    var button = this.div.querySelector('.button'); // all elements, not just document, have this DOM method: https://goo.gl/V8k43u
-    button.addEventListener('click', () => {
-        // this.div.style.display = 'none';
-        var targetDiv = document.querySelector('body > div.container');
-        targetDiv.style.display = 'none';
-        console.log('starting game');
-        this.app.fire('gamestart');
-    });
+  var style = document.createElement('style');
+  document.head.appendChild(style);
+  style.innerHTML = this['start-screen-style'].resource || '';
+
+  this.div = document.createElement('div');
+  this.div.classList.add('container');
+  this.div.innerHTML = this['start-screen'].resource || '';
+
+  document.body.appendChild(this.div);
+
+  var button = this.div.querySelector('.button'); // all elements, not just document, have this DOM method: https://goo.gl/V8k43u
+  button.addEventListener('click', () => {
+    // this.div.style.display = 'none';
+    var targetDiv = document.querySelector('body > div.container');
+  targetDiv.style.display = 'none';
+  console.log('starting game');
+  this.app.fire('gamestart');
+});
 };
