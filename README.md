@@ -55,13 +55,13 @@ Within the playcanvas editor, these numeric identifiers are abstracted, and much
 
 Below are some of the most important commonly used file locations. 
 
- - Network.js - public/files/assets/8668841/... -this file sets up our socket.io
+ - Network.js - public/files/assets/8668841/... - this file sets up our socket.io
  
  - collider.js - public/files/assets/8668838/... - this file sets up our player collisions
  
- - teleportable.js - public/files/assets/8668839/... - this file moves our player between points in map and handles some of the death and player creation logic.
+ - teleportable.js - public/files/assets/8668839/... - this file puts players in the right spot on update
  
  - start-screen.js - public/files/assets/8658762/... - this creates a new player
  
- - movement.js - public/files/assets/8668840/...- this defines movevment of player and tracks other players
+ - movement.js - public/files/assets/8668840/... - this defines movevment of player and tracks other players
  
