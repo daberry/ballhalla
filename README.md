@@ -10,12 +10,12 @@ Team
 
 ## Table of Contents
 
-1. [Usage](https://github.com/DJJS/thesis-project/blob/master/_README.md#usage)
-2. [Tools](https://github.com/DJJS/thesis-project/blob/master/_README.md#tools)
-    1. [Installing Dependencies](https://github.com/DJJS/thesis-project/blob/master/_README.md#installing-dependencies)
-    2. [Running Locally](https://github.com/DJJS/thesis-project/blob/master/_README.md#running-locally)
-3. [Workflow](https://github.com/DJJS/thesis-project/blob/master/_README.md#workflow)
-    1. [File Structure](https://github.com/DJJS/thesis-project/blob/master/_README.md#file-structure)
+1. [Usage](https://github.com/DJJS/thesis-project/blob/master/README.md#usage)
+2. [Tools](https://github.com/DJJS/thesis-project/blob/master/README.md#tools)
+    1. [Installing Dependencies](https://github.com/DJJS/thesis-project/blob/master/README.md#installing-dependencies)
+    2. [Running Locally](https://github.com/DJJS/thesis-project/blob/master/README.md#running-locally)
+3. [Workflow](https://github.com/DJJS/thesis-project/blob/master/README.md#workflow)
+    1. [File Structure](https://github.com/DJJS/thesis-project/blob/master/README.md#file-structure)
 ## Usage
 
 Just visit the [website](http://pond-game.herokuapp.com/), enter a nickname or optionally sign in, and click Play!
