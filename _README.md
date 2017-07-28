@@ -6,7 +6,7 @@ Team
 
   - Product Owner: David Berry
   - Scrum Master: Sean Brock
-  - Development Team Members: James Quillin, Juancarlos Jauregui
+  - Developers: James Quillin, Juancarlos Jauregui
 
 ## Table of Contents
 
