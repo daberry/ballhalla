@@ -45,4 +45,4 @@ Create a `.env` file to hold the information for the Redis database. Make sure t
 
 Fork main PlayCanvas project to your own PlayCanvas profile.  Develop features in the PlayCanvas editor.  Export and download current fork and replace the contents of the public folder with teh exported download.  You can then run the project locally by pointint Network.js to your localhost and opening mulitple tabs.  From there you may make pull requests to the main repo on GitHub, from which the code will be deployed to Heroku, and optionally uploaded to the main PlayCanvas project.
 
-In order to unit test scripts, you ...?  When committing and making a pull request to the main repo on GitHub, Travis CI will run the test suite.
+In order to unit test scripts, run ```sh npm test ```  When committing and making a pull request to the main repo on GitHub, Travis CI will run the test suite.
