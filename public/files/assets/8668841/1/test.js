@@ -2,24 +2,24 @@ var Network = pc.createScript('network');
 
 // initialize code called once per entity
 Network.prototype.initialize = function() {
-    this.socket = io('http://localhost:8081');
-    //this.socket = io('http://pond-game.herokuapp.com');
+    //this.socket = io('http://localhost:8081');
+    this.socket = io('http://pond-game.herokuapp.com');
     // this.socket = io('http://172.222.171.3:8081/');
     this.socket.emit('initialize');
     var self = this;
-    
+
     this.player = this.app.root.findByName ('Player');
     this.other = this.app.root.findByName ('Other');
     console.log('this.other', this.other);
-    
+
     this.socket.on('playerData', function(data) {
         self.initializePlayers(data);
     });
-    
+
     this.socket.on('playerJoined', function(data) {
         self.addPlayer(data);
     });
-    
+
     this.socket.on ('playerMoved', function (data) {
         self.movePlayer (data);
     });
@@ -29,13 +29,13 @@ Network.prototype.initializePlayers = function(data) {
     this.players = data.players;
     this.id = data.id;
     this.player.id = data.id;
-    
+
     for (var i = 0; i < this.players.length; i++) {
         if (i !== this.id) {
             this.players[i].entity = this.createPlayerEntity (data.players[i]);
         }
     }
-    
+
     this.initialized = true;
 };
 
@@ -46,11 +46,11 @@ Network.prototype.addPlayer = function(data) {
 
 Network.prototype.createPlayerEntity = function(data) {
     var newPlayer = this.other.clone();
-    
+
     newPlayer.enabled = true;
     newPlayer.id = data.id;
     newPlayer.lastCollision = null;
-    
+
     this.other.getParent().addChild(newPlayer);
     if (data) {
         console.log('data', data);
@@ -59,7 +59,7 @@ Network.prototype.createPlayerEntity = function(data) {
         console.log(this.player);
         newPlayer.rigidbody.teleport(data.x, data.y, data.z);
     }
-    
+
     return newPlayer;
 };
 
