@@ -1,12 +1,21 @@
 var Network = pc.createScript('network');
 
 Network.prototype.initialize = function() {
-  this.socket = io('http://pond-game.herokuapp.com');
-  this.socket.emit('initialize');
-    
+  // this.player = this.app.root.findByName('Player');
+  // this.other = this.app.root.findByName('Other');
+  // console.log('what is this? pc === this?', pc === this);
+  // window.stupidInitializeThis = this;
+};
+
+Network.prototype.smrtInitialize = function(inputVal, player, other) {
+  console.log('this in smrtInitialize: ', this);
+  this.socket = io('http://localhost:8081');
+  this.socket.emit('initialize', {nickName: inputVal});
   var self = this;
-  this.player = this.app.root.findByName ('Player');
-  this.other = this.app.root.findByName ('Other');
+  self.player = player;
+  self.other = other;
+  // this.player = this.app.root.findByName('Player');
+  // this.other = this.app.root.findByName('Other');
 
   this.socket.on('playerData', function(data) {
     self.initializePlayers(data);
@@ -19,10 +28,11 @@ Network.prototype.initialize = function() {
   this.socket.on ('playerMoved', function (data) {
     self.movePlayer (data);
   });
-};
+}
 
 Network.prototype.initializePlayers = function(data) {
   this.players = data.players;
+  this.player.nickName = data.nickName;
   this.id = data.id;
   this.player.id = data.id;
 
@@ -45,6 +55,7 @@ Network.prototype.createPlayerEntity = function(data) {
 
   newPlayer.enabled = true;
   newPlayer.id = data.id;
+  newPlayer.nickName = data.nickName;
   newPlayer.lastCollision = null;
 
   this.other.getParent().addChild(newPlayer);

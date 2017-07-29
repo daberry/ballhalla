@@ -36,22 +36,26 @@ var scoreboardCallback = function(err, response) {
 // ----------------------------------------------------------------
 var players = [];
 
-function Player (id) {
+function Player (id, nickName) {
   this.id = id;
   this.x = 0;
   this.y = 0;
   this.z = 0;
+  this.nickName = nickName || '';
   this.entity = null;
   this.lastCollision = null;
 }
 
 io.sockets.on('connection', function(socket) {
-  socket.on('initialize', function() {
+  console.log('connection event fired line 50 hi dave');
+  socket.on('initialize', function(data) {
     var idNum = players.length;
-    var newPlayer = new Player (idNum);
-    players.push(newPlayer);
+    var nickName = data.nickName;
+    var newPlayer = new Player (idNum, nickName);
 
-    socket.emit('playerData', {id: idNum, players: players});
+    players.push(newPlayer);
+    console.log('about to emit playerData');
+    socket.emit('playerData', {id: idNum, nickName: nickName, players: players});
 
     socket.broadcast.emit('playerJoined', newPlayer);
   });

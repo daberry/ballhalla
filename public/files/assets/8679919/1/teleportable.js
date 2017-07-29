@@ -19,8 +19,6 @@ Teleportable.prototype.update = function(dt) {
 
     this.entity.sound.play('wilhelm');
     this.app.fire('gameover');
-  } else if (pos.y < -4) {
-    this.entity.sound.play('wilhelm');
   }
 };
 
