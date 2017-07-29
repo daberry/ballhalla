@@ -12,7 +12,7 @@ Collider.prototype.onCollisionStart = function (result) {
 };
 
 Collider.prototype.onBump = function (result) {
-  if (result.other.name === "Other") {
+  if (result.other.name === 'Other') {
     this.entity.lastCollision = result.other.id;
     console.log(result.other, '>>>>> result.other');
     console.log(this.entity, '>>>>>this.entity');

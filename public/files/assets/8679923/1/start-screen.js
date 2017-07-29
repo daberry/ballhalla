@@ -25,7 +25,7 @@ StartScreen.prototype.initialize = function() {
     var playerRandVar = this.app.root.findByName('Player');
     var otherRandVar = this.app.root.findByName('Other');
 
-    var nickName = document.querySelector("#nicknameInput").value;
+    var nickName = document.querySelector('#nicknameInput').value;
 
     Network.prototype.smrtInitialize(nickName, playerRandVar, otherRandVar);
     console.log('starting game');

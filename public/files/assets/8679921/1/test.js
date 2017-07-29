@@ -28,7 +28,7 @@ Network.prototype.smrtInitialize = function(inputVal, player, other) {
   this.socket.on ('playerMoved', function (data) {
     self.movePlayer (data);
   });
-}
+};
 
 Network.prototype.initializePlayers = function(data) {
   this.players = data.players;
