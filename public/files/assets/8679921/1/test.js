@@ -28,10 +28,22 @@ Network.prototype.smrtInitialize = function(inputVal, player, other) {
   this.socket.on ('playerMoved', function (data) {
     self.movePlayer (data);
   });
+  this.socket.on('deleteOther', function (data) { //data = id from deleteOther
+    //deleting player of that id(aka data)
+    //destroy logic
+    this.players.data.id.destroy();//
+    //this.initializePlayers(data.players);
+    //possibly
+
+  })
 };
 
+//
+
 Network.prototype.initializePlayers = function(data) {
-  this.players = data.players;
+  this.players = data.players.filter(function(cur){
+    return cur !== 'dead'
+  });
   this.player.nickName = data.nickName;
   this.id = data.id;
   this.player.id = data.id;
@@ -57,8 +69,9 @@ Network.prototype.createPlayerEntity = function(data) {
   newPlayer.id = data.id;
   newPlayer.nickName = data.nickName;
   newPlayer.lastCollision = null;
-
-  this.other.getParent().addChild(newPlayer);
+  if (true){
+    this.other.getParent().addChild(newPlayer);
+  }
   if (data) {
     console.log('data', data);
     console.log('newPlayer', newPlayer);
@@ -71,7 +84,7 @@ Network.prototype.createPlayerEntity = function(data) {
 };
 
 Network.prototype.movePlayer = function (data) {
-  if (this.initialized) {
+  if (this.initialized && this.players[data.id].entity) {
     this.players[data.id].entity.rigidbody.teleport(data.x, data.y, data.z);
     this.players[data.id].entity.rigidbody.linearVelocity = new pc.Vec3(data.vx, data.vy, data.vz);
     this.players[data.id].entity.rigidbody.angularVelocity = new pc.Vec3(data.ax, data.ay, data.az);

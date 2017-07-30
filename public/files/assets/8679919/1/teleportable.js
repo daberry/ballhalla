@@ -19,6 +19,13 @@ Teleportable.prototype.update = function(dt) {
 
     this.entity.sound.play('wilhelm');
     this.app.fire('gameover');
+    //this is where we delete the dead player
+      //send event to server from array
+    this.entity.destroy();
+    socket.emit('deletePlayer', this.entity.id); //socket player listener on server
+
+  } else if (pos.y < -4 ) {
+    this.entity.destroy();
   }
 };
 

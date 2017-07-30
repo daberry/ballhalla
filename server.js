@@ -59,7 +59,11 @@ io.sockets.on('connection', function(socket) {
 
     socket.broadcast.emit('playerJoined', newPlayer);
   });
-
+  socket.on('deletePlayer', function(id) {
+    //remove the player from players
+    //socket.broadcast.emit('deleteOther', {id:id, players:players})
+    players[id] = 'dead'; // -1 may be wrong but testing....
+  })
   socket.on('positionUpdate', function(data) {
     var dataKeys = Object.keys(data);
     dataKeys.map(function(curKey) {
