@@ -13,7 +13,7 @@ Network.prototype.smrtInitialize = function(inputVal, player, other) {
   this.socket.emit('initialize', {nickName: inputVal});
   var self = this;
   self.player = player;
-  self.other = other;
+  //self.other = other;
   // this.player = this.app.root.findByName('Player');
   // this.other = this.app.root.findByName('Other');
 
@@ -70,7 +70,7 @@ Network.prototype.createPlayerEntity = function(data) {
   newPlayer.nickName = data.nickName;
   newPlayer.lastCollision = null;
   if (true){
-    this.other.getParent().addChild(newPlayer);
+    //this.other.getParent().addChild(newPlayer);
   }
   if (data) {
     console.log('data', data);
