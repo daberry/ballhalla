@@ -16,6 +16,6 @@ Collider.prototype.onBump = function (result) {
     this.entity.lastCollision = result.other.id;
     console.log(result.other, '>>>>> result.other');
     console.log(this.entity, '>>>>>this.entity');
-    console.log(this.player, ' >>>>>>>>> this.player');
+   
   }
 };
