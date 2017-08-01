@@ -45,14 +45,23 @@ function Player (id) {
 
 io.sockets.on('connection', function(socket) {
   //console.log('new connection', players.length);
-  socket.on('initialize', function() {
+  socket.on('initialize', function(nickName) {
     var idNum = players.length;
     var newPlayer = new Player (idNum);
+    newPlayer.nickName = nickName;
 
     players.push(newPlayer);
     socket.emit('playerData', {id: idNum, players: players});
 
+
     socket.broadcast.emit('playerJoined', newPlayer);
+  });
+
+  socket.on('deletePlayer', function(id) {
+    console.log('I"M IN DELETE PLAYER');
+    //remove the player from players
+    //socket.broadcast.emit('deleteOther', {id:id, players:players})
+    players[id] = 'dead'; // -1 may be wrong but testing....
   });
 
   socket.on('positionUpdate', function(data) {
