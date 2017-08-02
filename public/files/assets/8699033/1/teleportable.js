@@ -1,11 +1,14 @@
 var Teleportable = pc.createScript('teleportable');
 
 Teleportable.prototype.initialize = function() {
-  this.socket = io('http://localhost:8081');
   this.lastTeleportFrom = null;
   this.lastTeleportTo = null;
   this.lastTeleport = Date.now();
   this.startPosition = this.entity.getPosition().clone();
+    
+  this.entity.script.on('destroy', function() {
+    console.log('TELEPORTABLE DESTROYED');
+  });
 };
 
 Teleportable.prototype.update = function(dt) {
@@ -13,8 +16,6 @@ Teleportable.prototype.update = function(dt) {
 
   // when the player falls off: game over
   if (pos.y < -4 && this.entity.name === 'Player') {
-    this.teleport(this.lastTeleportFrom, this.lastTeleportTo);
-
     var targetDiv = document.querySelector('body > div.container');
     targetDiv.style.display = 'block';
 
@@ -22,12 +23,13 @@ Teleportable.prototype.update = function(dt) {
     this.app.fire('gameover');
     //this is where we delete the dead player
       //send event to server from array
+    window.socket.emit('deletePlayer', this.entity.id); //socket player listener on server
+    this.teleport(this.lastTeleportFrom, this.lastTeleportTo);
+    //this.entity.destroy();
+    
 
-    socket.emit('deletePlayer', this.entity.id); //socket player listener on server
-    //
-    console.log('about to destroy this.entity>>>>', this.entity)
-    this.entity.destroy();
-  } else if (pos.y < -4 ) {
+  } else if (pos.y < -4 && this.entity.name !== 'Player') {
+      console.log('this should never be run');
     this.entity.destroy();
   }
 };

@@ -1,19 +1,25 @@
 var Network = pc.createScript('network');
-
+var self;
 Network.prototype.initialize = function() {
-  // this.player = this.app.root.findByName('Player');
-  // this.other = this.app.root.findByName('Other');
+  console.log('in initialize', this.entity);
+  self = this;
+  this.player = this.entity; // this.app.root.findByName('Player');
+  this.other = this.app.root.findByName('Other');
   // console.log('what is this? pc === this?', pc === this);
   // window.stupidInitializeThis = this;
 };
 
-Network.prototype.smrtInitialize = function(inputVal, player, other) {
+Network.prototype.smrtInitialize = function() {
   console.log('this in smrtInitialize: ', this);
-  this.socket = io('http://localhost:8081');
-  this.socket.emit('initialize', {nickName: inputVal});
-  var self = this;
-  self.player = player;
-  //self.other = other;
+  if (window.socket === undefined) {
+    window.socket = io('http://localhost:8081');    
+  }  
+
+  this.socket = window.socket;
+  this.socket.emit('initialize', self.player.nickName);
+  // var self = this;
+  // self.player = player;
+  // self.other = other;
   // this.player = this.app.root.findByName('Player');
   // this.other = this.app.root.findByName('Other');
 
@@ -31,20 +37,21 @@ Network.prototype.smrtInitialize = function(inputVal, player, other) {
   this.socket.on('deleteOther', function (data) { //data = id from deleteOther
     //deleting player of that id(aka data)
     //destroy logic
-    this.players.data.id.destroy();//
+    console.log('deleting ', data.id);
+    this.players[data.id].destroy();//
     //this.initializePlayers(data.players);
     //possibly
-
-  })
+  });
 };
 
 //
 
 Network.prototype.initializePlayers = function(data) {
+    console.log('initializePlayers call');
   this.players = data.players.filter(function(cur){
-    return cur !== 'dead'
+    console.log('cur: ', cur, cur.id);
+    return cur !== 'dead';
   });
-  this.player.nickName = data.nickName;
   this.id = data.id;
   this.player.id = data.id;
 
@@ -58,33 +65,38 @@ Network.prototype.initializePlayers = function(data) {
 };
 
 Network.prototype.addPlayer = function(data) {
+  console.log('addPlayer call');
   this.players.push (data);
   this.players[this.players.length - 1].entity = this.createPlayerEntity (data);
 };
 
 Network.prototype.createPlayerEntity = function(data) {
-  var newPlayer = this.other.clone();
+  console.log('creating ball, id=', data.id, ' hopefully never true--> ', data === 'dead');
+    if (data !== undefined && data !== 'dead') {
+       var newPlayer = this.other.clone();
 
-  newPlayer.enabled = true;
-  newPlayer.id = data.id;
-  newPlayer.nickName = data.nickName;
-  newPlayer.lastCollision = null;
-  if (true){
-    //this.other.getParent().addChild(newPlayer);
-  }
-  if (data) {
-    console.log('data', data);
-    console.log('newPlayer', newPlayer);
-    console.log('newPLayer.rigidBody', newPlayer.rigidBody);
-    console.log(this.player);
-    newPlayer.rigidbody.teleport(data.x, data.y, data.z);
-  }
+      newPlayer.enabled = true;
+      newPlayer.id = data.id;
+      newPlayer.nickName = data.nickName;
+      newPlayer.lastCollision = null;
+      if (true){
+        this.other.getParent().addChild(newPlayer);
+      }
+      if (data) {
+        console.log('createPlayerEntity, teleporting created ball');  
+        // console.log('data', data);
+        // console.log('newPlayer', newPlayer);
+        // console.log('newPLayer.rigidBody', newPlayer.rigidBody);
+        // console.log(this.player);
+        newPlayer.rigidbody.teleport(data.x, data.y, data.z);
+      }
+      return newPlayer;       
+    }
 
-  return newPlayer;
 };
 
 Network.prototype.movePlayer = function (data) {
-  if (this.initialized && this.players[data.id].entity) {
+  if (this.initialized && this.players[data.id] && this.players[data.id].entity) {
     this.players[data.id].entity.rigidbody.teleport(data.x, data.y, data.z);
     this.players[data.id].entity.rigidbody.linearVelocity = new pc.Vec3(data.vx, data.vy, data.vz);
     this.players[data.id].entity.rigidbody.angularVelocity = new pc.Vec3(data.ax, data.ay, data.az);

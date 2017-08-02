@@ -17,31 +17,38 @@ Movement.prototype.update = function(dt) {
   var forceX = 0;
   var forceZ = 0;
 
-  // calculate force based on pressed keys
-  if (this.app.keyboard.isPressed(pc.KEY_A)) {
-    forceX = -this.speed;
-  }
+  if (!window.moveLock) {
+      // calculate force based on pressed keys
+    if (this.app.keyboard.isPressed(pc.KEY_A)) {
+      forceX = -this.speed;
+    }
 
-  if (this.app.keyboard.isPressed(pc.KEY_D)) {
-    forceX += this.speed;
-  }
+    if (this.app.keyboard.isPressed(pc.KEY_D)) {
+      forceX += this.speed;
+    }
 
-  if (this.app.keyboard.isPressed(pc.KEY_W)) {
-    forceZ = -this.speed;
-  }
+    if (this.app.keyboard.isPressed(pc.KEY_W)) {
+      forceZ = -this.speed;
+    }
 
-  if (this.app.keyboard.isPressed(pc.KEY_S)) {
-    forceZ += this.speed;
-  }
+    if (this.app.keyboard.isPressed(pc.KEY_S)) {
+      forceZ += this.speed;
+    }
 
-  // boost on space bar
-  if (this.app.keyboard.isPressed(pc.KEY_SPACE)) {
+      // boost on space bar
     var curVelocity = this.entity.rigidbody.linearVelocity;
-    var normalizer = Math.sqrt(Math.pow(curVelocity.data[0], 2) + Math.pow(curVelocity.data[2], 2));
-    var nx = curVelocity.data[0] / normalizer;
-    var ny = curVelocity.data[2] / normalizer;
-    this.entity.rigidbody.applyImpulse(0.3 * nx, 0, 0.3 * ny);
+
+    if (curVelocity.data[0] !== 0) {
+      if (this.app.keyboard.isPressed(pc.KEY_SPACE)) {
+        //var curVelocity^^^^//moved out of scope to check before enabling boost//Sean
+        var normalizer = Math.sqrt(Math.pow(curVelocity.data[0], 2) + Math.pow(curVelocity.data[2], 2));
+        var nx = curVelocity.data[0] / normalizer;
+        var ny = curVelocity.data[2] / normalizer;
+        this.entity.rigidbody.applyImpulse((0.3 * nx), 0, (0.3 * ny));
+      }
+    }
   }
+
 
   this.force.x = forceX;
   this.force.z = forceZ;
