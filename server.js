@@ -6,9 +6,9 @@ var app = express();
 var server = require('http').createServer(app);
 var io = require('socket.io')(server);
 var port = process.env.PORT || 8081;
-var redis;
 app.use(express.static(__dirname + '/public'));
 
+var redis;
 if (process.env.REDISTOGO_URL) {
   console.log('theres a redis url, here we go');
   var rtg   = require('url').parse(process.env.REDISTOGO_URL);
@@ -20,17 +20,15 @@ if (process.env.REDISTOGO_URL) {
 }
 var scoreboardCallback = function(err, response) {
   if (err) {console.error(err);}
-
-  //console.log('scoreboard callback: ', response);
-  // console.log(response);
 };
-// redis.zadd('scoreboard', 1, 'juancarlos');
-// redis.zadd('scoreboard', 0, 'dave');
 redis.zincrby('scoreobard', 2, 'dave');
 var scoreboard1 = redis.zrangebyscore('scoreboard', 0, 999999, 'WITHSCORES', scoreboardCallback);
 
 redis.zincrby('scoreboard', 1, 'dave');
 var scoreboard2 = redis.zrangebyscore('scoreboard', 0, 999999, 'WITHSCORES', scoreboardCallback);
+
+
+
 
 var players = [];
 
@@ -45,50 +43,70 @@ function Player (id) {
 }
 
 io.sockets.on('connection', function(socket) {
-  console.log('new connection', players.length);
+  console.log(' ');
+  console.log('new connection', socket.id);
+
   socket.on('initialize', function(nickName) {
+    console.log(' ');
+    console.log('-------------------------');
+    console.log('socket on initialize... ');
+    console.log('list of sockets: ', Object.keys(io.sockets.sockets));
+
     var idNum = players.length;
     var newPlayer = new Player (idNum);
     newPlayer.nickName = nickName;
 
     players.push(newPlayer);
+
+    console.log('emitting playerData... ');
     socket.emit('playerData', {id: idNum, players: players});
-    console.log('emitting player joined ', idNum);
+
+    console.log('broadcasting playerJoined... ');
+    console.log('-------------------------');
     socket.broadcast.emit('playerJoined', newPlayer);
   });
 
   socket.on('deletePlayer', function(id) {
-    console.log('IM IN DELETE PLAYER');
-    //remove the player from players
-    //socket.broadcast.emit('deleteOther', {id:id, players:players})
-    players[id] = 'dead'; // -1 may be wrong but testing....
+    console.log(' ');
+    console.log('players before deletion... ', players);
+
+    console.log(' ');
+    console.log('socket on deletePlayer... ');
+    console.log(' ');
+
+    players[id] = 'dead';
+    console.log('players after deletion... ', players);
+    // socket.disconnect();
   });
 
   socket.on('positionUpdate', function(data) {
-    var dataKeys = Object.keys(data);
-    //console.log(this, dataKeys);
-    dataKeys.map(function(curKey) {
-      if (curKey !== 'id') {
-        //console.log(data.id, players[data.id], curKey);
-        players[data.id][curKey] = data[curKey];
-      }
-    });
-    /*
-    players[data.id].x = data.x;
-    players[data.id].y = data.y;
-    players[data.id].z = data.z;
-    players[data.id].vx: lv.x,
-    players[data.id.vy: lv.y,
-    players[data.id].vz: lv.z,
-    players[data.id].ax: av.x,
-    players[data.id].ay: av.y,
-    players[data.id].az: av.z
-    */
-    socket.broadcast.emit('playerMoved', data);
+    // console.log(Date.now(), ' socket on positionUpdate... ');
+
+    if (players[data.id] !== 'dead') {
+      var dataKeys = Object.keys(data);
+      dataKeys.map(function(curKey) {
+        if (curKey !== 'id') {
+          players[data.id][curKey] = data[curKey];
+        }
+      });
+
+      // console.log(Date.now(), ' broadcasting playerMoved... ');
+      socket.broadcast.emit('playerMoved', data);
+    }
   });
+
+  // currently this emites 1 point which everyone takes per second
+  // even though it sends an id, the clients currently always take the
+  // point, even if it's not 'theirs' so that it mimics time-based scoring
+  var randPlayerId;
+  setInterval(function() {
+    randPlayerId = 0;
+    console.log('emitting point', randPlayerId);
+    socket.emit('pointScored', randPlayerId);
+  }, 1000);
 });
 
-console.log('server running');
+console.log('server running on port ', port);
 server.listen(port);
 
 exports.players = players;

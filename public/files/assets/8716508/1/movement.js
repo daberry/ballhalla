@@ -44,8 +44,8 @@ Movement.prototype.update = function(dt) {
       forceZ += this.speed;
     }
 
-      // boost on space bar
     var curVelocity = this.entity.rigidbody.linearVelocity;
+<<<<<<< HEAD:public/files/assets/8699036/1/movement.js
 <<<<<<< HEAD
 
     if (curVelocity.data[0] !== 0) {
@@ -63,6 +63,16 @@ Movement.prototype.update = function(dt) {
         var ny = curVelocity.data[2] / normalizer;
         this.entity.rigidbody.applyImpulse(0.3 * nx, 0, 0.3 * ny);         
 >>>>>>> 8bf65a344ebb1bcedea4bfa4d323caa262161085
+=======
+      
+    // boost on space bar
+    if (curVelocity.data[0] !== 0) {
+      if (this.app.keyboard.isPressed(pc.KEY_SPACE)) {
+        var normalizer = Math.sqrt(Math.pow(curVelocity.data[0], 2) + Math.pow(curVelocity.data[2], 2));
+        var nx = curVelocity.data[0] / normalizer;
+        var ny = curVelocity.data[2] / normalizer;
+        this.entity.rigidbody.applyImpulse(0.3 * nx, 0, 0.3 * ny);
+>>>>>>> e63ffea44942b914932e69163f1fc8d14ca32050:public/files/assets/8716508/1/movement.js
       }
     }
   }

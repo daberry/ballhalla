@@ -20,6 +20,7 @@ Teleportable.prototype.update = function(dt) {
     targetDiv.style.display = 'block';
 
     this.entity.sound.play('wilhelm');
+      
     this.app.fire('gameover');
     //this is where we delete the dead player
       //send event to server from array

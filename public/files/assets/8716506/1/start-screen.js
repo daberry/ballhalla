@@ -27,14 +27,21 @@ StartScreen.prototype.initialize = function() {
 
     var nickName = document.querySelector('#nicknameInput').value;
     playerRandVar.nickName = nickName;
+<<<<<<< HEAD:public/files/assets/8699029/1/start-screen.js
       
 <<<<<<< HEAD
 
 =======
+=======
+>>>>>>> e63ffea44942b914932e69163f1fc8d14ca32050:public/files/assets/8716506/1/start-screen.js
     
 >>>>>>> 8bf65a344ebb1bcedea4bfa4d323caa262161085
     Network.prototype.smrtInitialize();
     console.log('starting game');
+      
+    // reset playerScore to 0 for next player
+    var prev = window.playerscore.innerHTML = '0';
+    
     this.app.fire('gamestart');
   });
 };
