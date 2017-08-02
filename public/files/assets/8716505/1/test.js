@@ -9,8 +9,7 @@ Network.prototype.initialize = function() {
   window.player = this.player;
 
   this.other = this.app.root.findByName('Other');
-<<<<<<< HEAD:public/files/assets/8699030/1/test.js
-<<<<<<< HEAD
+
   // console.log('what is this? pc === this?', pc === this);
   // window.stupidInitializeThis = this;
 };
@@ -18,8 +17,8 @@ Network.prototype.initialize = function() {
 Network.prototype.smrtInitialize = function() {
   console.log('this in smrtInitialize: ', this);
   if (window.socket === undefined) {
-    window.socket = io('http://localhost:8081');    
-  }  
+    window.socket = io('http://localhost:8081');
+  }
 
   this.socket = window.socket;
   this.socket.emit('initialize', self.player.nickName);
@@ -28,12 +27,11 @@ Network.prototype.smrtInitialize = function() {
   // self.other = other;
   // this.player = this.app.root.findByName('Player');
   // this.other = this.app.root.findByName('Other');
-=======
-=======
+
   // console.log('what is this? pc === this?', pc === this);
   // window.stupidInitializeThis = this;
 };
->>>>>>> e63ffea44942b914932e69163f1fc8d14ca32050:public/files/assets/8716505/1/test.js
+
 
 Network.prototype.smrtInitialize = function() {
   console.log('this in smrtInitialize: ', this);
@@ -43,16 +41,13 @@ Network.prototype.smrtInitialize = function() {
   }
 
   this.socket = window.socket;
-<<<<<<< HEAD:public/files/assets/8699030/1/test.js
->>>>>>> 8bf65a344ebb1bcedea4bfa4d323caa262161085
-=======
+
   this.socket.emit('initialize', self.player.nickName);
   // var self = this;
   // self.player = player;
   // self.other = other;
   // this.player = this.app.root.findByName('Player');
   // this.other = this.app.root.findByName('Other');
->>>>>>> e63ffea44942b914932e69163f1fc8d14ca32050:public/files/assets/8716505/1/test.js
 
   this.socket.on('playerData', function(data) {
     self.initializePlayers(data);
@@ -65,8 +60,6 @@ Network.prototype.smrtInitialize = function() {
   this.socket.on ('playerMoved', function (data) {
     self.movePlayer (data);
   });
-<<<<<<< HEAD:public/files/assets/8699030/1/test.js
-<<<<<<< HEAD
   this.socket.on('deleteOther', function (data) { //data = id from deleteOther
     //deleting player of that id(aka data)
     //destroy logic
@@ -75,9 +68,7 @@ Network.prototype.smrtInitialize = function() {
     //this.initializePlayers(data.players);
     //possibly
   });
-=======
->>>>>>> 8bf65a344ebb1bcedea4bfa4d323caa262161085
-=======
+
   // this.socket.on('deleteOther', function (data) { //data = id from deleteOther
   //   //deleting player of that id(aka data)
   //   //destroy logic
@@ -86,26 +77,25 @@ Network.prototype.smrtInitialize = function() {
   //   //this.initializePlayers(data.players);
   //   //possibly
   // });
->>>>>>> e63ffea44942b914932e69163f1fc8d14ca32050:public/files/assets/8716505/1/test.js
 };
 
 //
 
 Network.prototype.initializePlayers = function(data) {
-<<<<<<< HEAD
+
     console.log('initializePlayers call');
   this.players = data.players.filter(function(cur){
     console.log('cur: ', cur, cur.id);
     return cur !== 'dead';
   });
-=======
+
   console.log('initializePlayers call ', data.id);
   this.players = data.players.filter(function(cur){
     //console.log('cur: ', cur, cur.id);
     return cur !== 'dead';
   });
 
->>>>>>> 8bf65a344ebb1bcedea4bfa4d323caa262161085
+
   this.id = data.id;
   this.player.id = data.id;
   console.log('players length: ', this.players.length, ' current playerId', this.player.id);
@@ -121,7 +111,7 @@ Network.prototype.initializePlayers = function(data) {
 
 Network.prototype.addPlayer = function(data) {
   console.log('addPlayer call');
-<<<<<<< HEAD
+
   this.players.push (data);
   this.players[this.players.length - 1].entity = this.createPlayerEntity (data);
 };
@@ -139,16 +129,16 @@ Network.prototype.createPlayerEntity = function(data) {
         this.other.getParent().addChild(newPlayer);
       }
       if (data) {
-        console.log('createPlayerEntity, teleporting created ball');  
+        console.log('createPlayerEntity, teleporting created ball');
         // console.log('data', data);
         // console.log('newPlayer', newPlayer);
         // console.log('newPLayer.rigidBody', newPlayer.rigidBody);
         // console.log(this.player);
         newPlayer.rigidbody.teleport(data.x, data.y, data.z);
       }
-      return newPlayer;       
+      return newPlayer;
     }
-=======
+
   // this.players[this.players.length - 1].entity = this.createPlayerEntity(data);
   data.entity = this.createPlayerEntity(data);
   this.players.push(data);
@@ -184,11 +174,7 @@ Network.prototype.createPlayerEntity = function(data) {
     }
     return newPlayer;
   }
-<<<<<<< HEAD:public/files/assets/8699030/1/test.js
->>>>>>> 8bf65a344ebb1bcedea4bfa4d323caa262161085
 
-=======
->>>>>>> e63ffea44942b914932e69163f1fc8d14ca32050:public/files/assets/8716505/1/test.js
 };
 
 Network.prototype.movePlayer = function (data) {
