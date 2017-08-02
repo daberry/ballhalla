@@ -25,6 +25,10 @@ Teleportable.prototype.update = function(dt) {
       //send event to server from array
     window.socket.emit('deletePlayer', this.entity.id); //socket player listener on server
     this.teleport(this.lastTeleportFrom, this.lastTeleportTo);
+<<<<<<< HEAD
+=======
+    window.clientCurrentPlayerReference = this.entity;
+>>>>>>> 8bf65a344ebb1bcedea4bfa4d323caa262161085
     //this.entity.destroy();
     
 

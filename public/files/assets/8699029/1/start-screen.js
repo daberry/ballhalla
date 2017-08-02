@@ -28,7 +28,11 @@ StartScreen.prototype.initialize = function() {
     var nickName = document.querySelector('#nicknameInput').value;
     playerRandVar.nickName = nickName;
       
+<<<<<<< HEAD
 
+=======
+    
+>>>>>>> 8bf65a344ebb1bcedea4bfa4d323caa262161085
     Network.prototype.smrtInitialize();
     console.log('starting game');
     this.app.fire('gamestart');

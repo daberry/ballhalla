@@ -6,30 +6,31 @@ var app = express();
 var server = require('http').createServer(app);
 var io = require('socket.io')(server);
 var port = process.env.PORT || 8081;
+var redis;
 app.use(express.static(__dirname + '/public'));
 
 if (process.env.REDISTOGO_URL) {
   console.log('theres a redis url, here we go');
-  var rtg   = require("url").parse(process.env.REDISTOGO_URL);
-  var redis = require("redis").createClient(rtg.port, rtg.hostname);
-  redis.auth(rtg.auth.split(":")[1]);
+  var rtg   = require('url').parse(process.env.REDISTOGO_URL);
+  redis = require('redis').createClient(rtg.port, rtg.hostname);
+  redis.auth(rtg.auth.split(':')[1]);
 
 } else {
-  var redis = require("redis").createClient();
+  redis = require('redis').createClient();
 }
 var scoreboardCallback = function(err, response) {
   if (err) {console.error(err);}
 
   //console.log('scoreboard callback: ', response);
   // console.log(response);
-}
-// redis.zadd("scoreboard", 1, "juancarlos");
-// redis.zadd("scoreboard", 0, "dave");
-redis.zincrby("scoreobard", 2, "dave");
-var scoreboard1 = redis.zrangebyscore("scoreboard", 0, 999999, "WITHSCORES", scoreboardCallback);
+};
+// redis.zadd('scoreboard', 1, 'juancarlos');
+// redis.zadd('scoreboard', 0, 'dave');
+redis.zincrby('scoreobard', 2, 'dave');
+var scoreboard1 = redis.zrangebyscore('scoreboard', 0, 999999, 'WITHSCORES', scoreboardCallback);
 
-redis.zincrby("scoreboard", 1, "dave");
-var scoreboard2 = redis.zrangebyscore("scoreboard", 0, 999999, "WITHSCORES", scoreboardCallback);
+redis.zincrby('scoreboard', 1, 'dave');
+var scoreboard2 = redis.zrangebyscore('scoreboard', 0, 999999, 'WITHSCORES', scoreboardCallback);
 
 var players = [];
 
@@ -44,7 +45,7 @@ function Player (id) {
 }
 
 io.sockets.on('connection', function(socket) {
-  //console.log('new connection', players.length);
+  console.log('new connection', players.length);
   socket.on('initialize', function(nickName) {
     var idNum = players.length;
     var newPlayer = new Player (idNum);
@@ -52,13 +53,12 @@ io.sockets.on('connection', function(socket) {
 
     players.push(newPlayer);
     socket.emit('playerData', {id: idNum, players: players});
-
-
+    console.log('emitting player joined ', idNum);
     socket.broadcast.emit('playerJoined', newPlayer);
   });
 
   socket.on('deletePlayer', function(id) {
-    console.log('I"M IN DELETE PLAYER');
+    console.log('IM IN DELETE PLAYER');
     //remove the player from players
     //socket.broadcast.emit('deleteOther', {id:id, players:players})
     players[id] = 'dead'; // -1 may be wrong but testing....
