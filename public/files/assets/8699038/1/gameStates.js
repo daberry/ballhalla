@@ -9,10 +9,11 @@ GameStates.prototype.initialize = function() {
     this.app.fire("game:gamestart");
     this.Game.enabled = true;
     this.StartScreen.enabled = false;
+    this.app.fire('player:text');
   }, this);
 
   this.app.on('gameover', function() {
-    this.app.fire("game:gameover");
+    this.app.fire('game:gameover');
     this.Game.enabled = false;
     this.StartScreen.enabled = true;
   }, this);

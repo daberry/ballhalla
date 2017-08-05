@@ -37,11 +37,11 @@ io.sockets.on('connection', function(socket) {
     var newPlayer = new Player (idNum);
     newPlayer.nickName = nickName;
     players.push(newPlayer);
-    
+
     redis.zadd('scoreboard', 0, '' + idNum + ' ' + nickName);
     socket.emit('playerData', {id: idNum, players: players});
     socket.broadcast.emit('playerJoined', newPlayer);
-    
+
     var initialCallback = function(err, res) {
       if (err) {
         console.log(err);
@@ -82,6 +82,16 @@ io.sockets.on('connection', function(socket) {
       socket.broadcast.emit('playerMoved', data);
     }
   });
+
+  // currently this emites 1 point which everyone takes per second
+  // even though it sends an id, the clients currently always take the
+  // point, even if it's not 'theirs' so that it mimics time-based scoring
+  var randPlayerId;
+  setInterval(function() {
+    randPlayerId = 0;
+    //console.log('emitting point', randPlayerId);
+    socket.emit('pointScored', randPlayerId);
+  }, 1000);
 });
 
 console.log('server running on port ', port);

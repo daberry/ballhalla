@@ -16,8 +16,9 @@ StartScreen.prototype.initialize = function() {
 
   document.body.appendChild(this.div);
 
-  var button = this.div.querySelector('.button');
+  var button = this.div.querySelector('.button'); // all elements, not just document, have this DOM method: https://goo.gl/V8k43u
   button.addEventListener('click', () => {
+    // this.div.style.display = 'none';
     var targetDiv = document.querySelector('body > div.container');
     targetDiv.style.display = 'none';
 
@@ -26,9 +27,13 @@ StartScreen.prototype.initialize = function() {
 
     var nickName = document.querySelector('#nicknameInput').value;
     playerRandVar.nickName = nickName;
-
+      
+    
     Network.prototype.smrtInitialize();
-
+      
+    // // reset playerScore to 0 for next player
+    // var prev = window.playerscore.innerHTML = '0';
+      
     console.log('starting game');
     this.app.fire('gamestart');
   });
