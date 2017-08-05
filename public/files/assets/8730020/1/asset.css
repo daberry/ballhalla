@@ -1,29 +1,30 @@
 .sb-container {
-  color: #444444;
-  position: absolute;
-  width: 15%;
-  height: 35%;
-  top: 20px;
-  right: 20px;
-  background-color: rgba(178, 255, 89, 0.75);
-  min-width: 240px;
+    color: #444444;
+    position: absolute;
+    width: 15%;
+    height: 35%;
+    top: 20px;
+    right: 20px;
+    background-color: rgba(178, 255, 89, 0.75);
+    min-width: 240px;
 }
 
 .sb-wrapper {
-  padding: 20px;
+    padding: 20px;
 }
 
 .sb-score {
-  font-weight: bold;
-  font-size: 16px;
-  padding: 8px 0;
+/*     text-shadow: 2px 2px gray; */
+    font-weight: bold;
+    font-size: 16px;
+    padding: 8px 0;
 }
 
 #score-list {
-  list-style-type: none;
-  padding-left: 0;
+    list-style-type: none;
+    padding-left: 0;
 }
 
 .h-rule {
-  border-color: #444444;
+    border-color: #444444;
 }
