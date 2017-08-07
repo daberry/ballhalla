@@ -1,4 +1,3 @@
-// remember to require files for testing here
 var expect = require('chai').expect;
 
 // gamejs > module.exports = testVar;

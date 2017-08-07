@@ -1,5 +1,4 @@
 var expect = require('chai').expect;
-// remember to require files for testing here
 
 // server.js > module.exports = testVar;
 var server = require('../../server.js');

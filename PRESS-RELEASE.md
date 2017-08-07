@@ -29,8 +29,8 @@
 
 ## Customer Quote ##
 
-  James Quillin who is definitely a customer... said "Sometimes I don't have the time for a full round of Counterstrike so I'll just jump onto Ballhalla!, I found that after a few rounds of gameplay I could hold my own and in no time I'll be King of the Hill.
+  One of our users said "Sometimes I don't have the time for a full round of Counterstrike so I'll just jump onto Ballhalla!, I found that after a few rounds of gameplay I could hold my own and in no time I'll be King of the Hill.
 
 ## Closing and Call to Action ##
 
-  If you would like to find out more about Ballhalla! please feel free to leave feedback to the development team @ insert email!!!!!!!!!!!!!!!!!!!! or visit pondgame-herokuapp.com !!!!!!!!!!!! change address to play the latest version.
+  If you would like to find out more about Ballhalla! please feel free to leave feedback to the development team email ballhallahr24@gmail.com or visit pondgame-herokuapp.com to play the latest version.

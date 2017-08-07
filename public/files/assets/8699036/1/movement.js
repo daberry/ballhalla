@@ -4,7 +4,7 @@ Movement.attributes.add('speed', {
   type: 'number',
   default: 0.1,
   min: 0.05,
-  max: 0.5,
+  max: 1,
   precision: 2,
   description: 'Controls the movement speed'
 });

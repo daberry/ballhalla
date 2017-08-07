@@ -1,4 +1,4 @@
-# Ballhalla
+# Ballhalla!
 
 A casual free-for-all king of the hill game with an easy learning curve and no sign up required.
 

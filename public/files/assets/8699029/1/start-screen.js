@@ -30,6 +30,10 @@ StartScreen.prototype.initialize = function() {
       
     
     Network.prototype.smrtInitialize();
+      
+    // // reset playerScore to 0 for next player
+    // var prev = window.playerscore.innerHTML = '0';
+      
     console.log('starting game');
     this.app.fire('gamestart');
   });

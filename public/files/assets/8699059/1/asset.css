@@ -3,13 +3,16 @@
     width: 100%;
     height: 100%;
     background-color: #aaaaaa;
+    background-image: URL('http://i.imgur.com/eCtAn05.jpg');
+    background-size: contain;
+    background-image: no-repeat;
 }
 
 .content-container {
   width: 50%;
   margin: 0 auto;
-  margin-top: 10%;
-  padding-top: 10%
+/*   margin-top: 10%;
+  padding-top: 10% */
 }
 
 .content {
@@ -25,4 +28,20 @@ input.content {
 
 button.content {
   min-width: 100px;
+}
+
+.logo {
+    text-align: center;
+    font-size: 1200%;
+    font-weight: bold;
+    color: white;  /* Fallback: assume this color ON TOP of image */
+    background: red;
+    background: -webkit-linear-gradient(left top, red, yellow);
+    background: -o-linear-gradient(bottom right, red, yellow);
+    background: -moz-linear-gradient(bottom right, red, yellow);
+    background: linear-gradient(to bottom right, red, yellow);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    margin-top: 158px;
+    margin-bottom: 98px;
 }

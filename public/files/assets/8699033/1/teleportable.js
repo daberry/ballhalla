@@ -23,7 +23,7 @@ Teleportable.prototype.update = function(dt) {
     this.app.fire('gameover');
     //this is where we delete the dead player
     //send event to server from array
-    window.socket.emit('deletePlayer', this.entity.id); //socket player listener on server
+    window.socket.emit('deletePlayer', this.entity.id, this.entity.lastCollision); //socket player listener on server
     this.teleport(this.lastTeleportFrom, this.lastTeleportTo);
     window.clientCurrentPlayerReference = this.entity;
     //this.entity.destroy();
