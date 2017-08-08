@@ -6,7 +6,7 @@ GameStates.attributes.add('StartScreen', {type: 'entity'});
 GameStates.prototype.initialize = function() {
 
   this.app.on('gamestart', function() {
-    this.app.fire("game:gamestart");
+    this.app.fire('game:gamestart');
     this.Game.enabled = true;
     this.StartScreen.enabled = false;
     this.app.fire('player:text');
