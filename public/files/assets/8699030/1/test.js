@@ -71,7 +71,7 @@ Network.prototype.createPlayerEntity = function(data) {
       }
       return accum;
     }, false);
-
+    
   in an 'if(this.player){...} to remove an error: Cannot read property 'reduce' of undefined, line 65
   */
   var doesIdExist;

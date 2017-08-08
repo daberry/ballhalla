@@ -15,5 +15,5 @@ Billboard.prototype.update = function (dt) {
   parentInverseQuat = this.entity.parent.getRotation().invert();
   newPosition = parentInverseQuat.transformVector(defVec);
   this.entity.setLocalPosition(newPosition.x, newPosition.y, newPosition.z);
-
+  //this.entity.translateLocal(0,1,0);
 };
