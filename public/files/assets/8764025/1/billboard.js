@@ -1,6 +1,5 @@
 var Billboard = pc.createScript('billboard');
 var defVec = new pc.Vec3(0,1,0);
-var lastDate = new Date();
 var parentInverseQuat;
 var newPosition;
 
