@@ -4,7 +4,7 @@ var parentInverseQuat;
 var newPosition;
 // initialize code called once per entity
 ScriptCrown.prototype.initialize = function() {
-    this.camera = this.app.root.findByName('camera'); 
+  this.camera = this.app.root.findByName('camera');
 };
 
 // update code called every frame

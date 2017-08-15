@@ -21,6 +21,7 @@
   },
   "homepage": "https://github.com/daberry/thesis-project#readme",
   "dependencies": {
+    "@risingstack/trace": "^3.16.0",
     "chai": "^4.1.0",
     "dotenv": "^4.0.0",
     "express": "^4.15.3",
