@@ -77,7 +77,7 @@ io.sockets.on('connection', function(socket) {
 
 
   socket.on('positionUpdate', function(data) { //-----------------------------
-    if (players[data.id] !== 'dead') {
+    if (players[data.id] && players[data.id] !== 'dead') {
       var dataKeys = Object.keys(data);
       dataKeys.map(function(curKey) {
         if (curKey !== 'id') {
