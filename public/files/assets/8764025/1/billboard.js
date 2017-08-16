@@ -1,6 +1,5 @@
 var Billboard = pc.createScript('billboard');
 var defVec = new pc.Vec3(0,1,0);
-var lastDate = new Date();
 var parentInverseQuat;
 var newPosition;
 
@@ -16,5 +15,5 @@ Billboard.prototype.update = function (dt) {
   parentInverseQuat = this.entity.parent.getRotation().invert();
   newPosition = parentInverseQuat.transformVector(defVec);
   this.entity.setLocalPosition(newPosition.x, newPosition.y, newPosition.z);
-
+  //this.entity.translateLocal(0,1,0);
 };

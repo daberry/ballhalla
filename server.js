@@ -1,4 +1,5 @@
 require('dotenv').config();
+require('@risingstack/trace');
 var express = require('express');
 var app = express();
 var server = require('http').createServer(app);
@@ -49,30 +50,34 @@ io.sockets.on('connection', function(socket) {
         socket.emit('leaderboardUpdate', res);
         socket.broadcast.emit('leaderboardUpdate', res);
       }
-    }
+    };
     redis.zrevrangebyscore('scoreboard', '+inf', '-inf', 'WITHSCORES', initialCallback);
   });
 
   socket.on('deletePlayer', function(id, lastCollision) {
-    redis.zrem('scoreboard', '' + id + ' ' + players[id].nickName);
-    var playerGettingPoint = '' + lastCollision + ' ' + players[lastCollision].nickName;
-    if (players[lastCollision] !== 'dead') {
-      redis.zincrby('scoreboard', 1, playerGettingPoint);
-    }
-    players[id] = 'dead';
-
-    var leaderboardCallback = function(err, res) {
-      if (err) {
-        console.log(err);
-      } else {
-        socket.broadcast.emit('leaderboardUpdate', res);
+    if (players[lastCollision]) {
+      redis.zrem('scoreboard', '' + id + ' ' + players[id].nickName);
+      var playerGettingPoint = '' + lastCollision + ' ' + players[lastCollision].nickName;
+      if (players[lastCollision] !== 'dead') {
+        redis.zincrby('scoreboard', 1, playerGettingPoint);
       }
+      players[id] = 'dead';
+
+      var leaderboardCallback = function (err, res) {
+        if (err) {
+          console.log(err);
+        } else {
+          socket.broadcast.emit('leaderboardUpdate', res);
+        }
+      };
+      redis.zrevrangebyscore('scoreboard', '+inf', '-inf', 'WITHSCORES', leaderboardCallback);
     }
-    redis.zrevrangebyscore('scoreboard', '+inf', '-inf', 'WITHSCORES', leaderboardCallback);
   });
 
+
+
   socket.on('positionUpdate', function(data) { //-----------------------------
-    if (players[data.id] !== 'dead') {
+    if (players[data.id] && players[data.id] !== 'dead') {
       var dataKeys = Object.keys(data);
       dataKeys.map(function(curKey) {
         if (curKey !== 'id') {
