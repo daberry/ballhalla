@@ -9,7 +9,7 @@
 }
 
 .content-container {
-  width: 50%;
+  width: 100%;
   margin: 0 auto;
 /*   margin-top: 10%;
   padding-top: 10% */
@@ -31,9 +31,9 @@ button.content {
 }
 
 .logo {
-    width: 50%;
+    width: 100%;
     text-align: center;
-    font-size: 1200%;
+    font-size: 20vw;
     font-weight: bold;
     color: white;  /* Fallback: assume this color ON TOP of image */
     background: red;
