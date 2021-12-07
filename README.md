@@ -18,7 +18,7 @@ Team
     1. [File Structure](https://github.com/DJJS/thesis-project/blob/master/README.md#file-structure)
 ## Usage
 
-Just visit the [website](http://pond-game.herokuapp.com/), enter a nickname or optionally sign in, and click Play!
+Just visit the [website](http://ballhalla.herokuapp.com/), enter a nickname or optionally sign in, and click Play!
 
 ## Tools
 
